@@ -1,63 +1,131 @@
-# ResNet 论文复现
+# AI-learning
 
-本目录复现 PDF 中的经典论文 **Deep Residual Learning for Image Recognition**。代码实现了残差连接、BasicBlock、Bottleneck，以及论文中常用的 CIFAR-10 和 ImageNet 风格 ResNet 结构。
+面向 AI 学习与实践的个人仓库，用来系统整理：
 
-## 文件结构
+- 学习笔记
+- 可运行示例
+- 练习与实验
+- 数据处理 / 模型训练相关代码
 
-```text
-resnet/
-|-- 1、ResNet 2015年12月.pdf
-|-- model.py          # ResNet-20/32/44/56/110 和 ResNet-18/34/50/101/152
-|-- cifar10_data.py   # 不依赖 torchvision 的 CIFAR-10 下载、解析、增强
-|-- train.py          # CIFAR-10 训练脚本
-|-- predict.py        # 单张图片推理脚本
-`-- README.md
-```
+适合作为 AI 入门到进阶的练习场，而不是单一业务项目。
 
-## 论文要点
+---
 
-- 核心思想：学习残差函数 `F(x) = H(x) - x`，网络输出为 `F(x) + x`。
-- 直接收益：更深的网络不再因为退化问题难以优化。
-- CIFAR-10 设置：论文使用 `6n + 2` 层的 ResNet，如 ResNet-20、32、44、56、110。
-- ImageNet 设置：论文使用 BasicBlock 构建 ResNet-18/34，使用 Bottleneck 构建 ResNet-50/101/152。
+## 项目能做什么
 
-## 快速验证
+| 目标 | 对应内容 |
+| --- | --- |
+| 理解概念 | 笔记与文档 |
+| 跑通代码 | 示例与脚本 |
+| 巩固练习 | 习题 / 实验 |
+| 做小实验 | 数据、模型、训练与评估代码 |
 
-先在项目根目录安装依赖：
+---
 
-```powershell
-python -m pip install -r requirements.txt
-```
+## 目录结构
 
-跑一个小样本 sanity check：
-
-```powershell
-python .\resnet\train.py --epochs 1 --limit-train 512 --limit-test 256 --model resnet20
-```
-
-完整训练 ResNet-20：
-
-```powershell
-python .\resnet\train.py --model resnet20 --epochs 160 --batch-size 128
-```
-
-训练完成后会保存最佳 checkpoint：
+> 以下为常见组织方式；若本地目录名不同，以实际仓库为准。
 
 ```text
-models/resnet20_cifar10.pt
+AI-learning/
+├── README.md          # 项目说明
+├── docs/ 或 notes/    # 学习笔记、概念整理
+├── examples/          # 可运行示例
+├── exercises/         # 练习与作业
+├── data/              # 样例数据与预处理
+├── models/            # 模型定义、训练、评估
+├── utils/             # 通用工具函数
+├── config/            # 配置与超参数
+├── tests/             # 测试（如有）
+└── outputs/           # 运行日志、结果、图表（如有）
 ```
 
-## 推理
+### 各目录职责
 
-```powershell
-python .\resnet\predict.py --image .\path\to\image.png --model-path .\models\resnet20_cifar10.pt
+- **docs / notes**：沉淀知识点、公式理解、阅读摘要、学习路线
+- **examples**：最小可运行示例，优先保证“能跑通”
+- **exercises**：练习题、实验任务、参考实现
+- **data**：样例数据、数据清洗与特征处理脚本
+- **models**：模型结构、训练循环、评估与推理
+- **utils**：日志、路径、可视化等复用工具
+- **config**：路径、超参数等可配置项
+- **outputs**：实验产物，便于复盘
+
+---
+
+## 快速开始
+
+### 1. 克隆项目
+
+```bash
+git clone <your-repo-url>
+cd AI-learning
 ```
 
-## 可选模型
+### 2. 创建环境并安装依赖
 
-```text
-resnet20, resnet32, resnet44, resnet56, resnet110
-resnet18, resnet34, resnet50, resnet101, resnet152
+```bash
+# 建议使用虚拟环境
+python -m venv .venv
+
+# Windows
+.venv\Scripts\activate
+
+# macOS / Linux
+# source .venv/bin/activate
+
+pip install -r requirements.txt
 ```
 
-其中 `resnet20` 到 `resnet110` 使用 CIFAR-10 论文结构；`resnet18` 到 `resnet152` 使用 ImageNet 风格结构。当前训练脚本默认训练 CIFAR-10，因此建议优先使用 `resnet20` 或 `resnet32` 做本地实验。
+> 如果仓库里是 `pyproject.toml` / `environment.yml`，按对应方式安装即可。
+
+### 3. 运行示例
+
+```bash
+# 示例：运行某个 demo（按实际路径修改）
+python examples/xxx.py
+```
+
+---
+
+## 推荐学习方式
+
+1. **先看笔记**：建立概念框架  
+2. **再跑示例**：把流程跑通  
+3. **再做练习**：独立实现关键步骤  
+4. **最后做小实验**：换数据、改参数、对比结果  
+
+---
+
+## 使用建议
+
+- 每个示例尽量保持“单一目标”，方便复用和回顾
+- 数据和大文件不要直接塞进 Git；可用说明文件记录来源与下载方式
+- 实验参数尽量放进 `config/`，避免硬编码
+- 重要结论写回 `docs/`，形成可检索的知识库
+
+---
+
+## 环境要求
+
+- Python 3.9+（建议）
+- 按具体示例可能需要：
+  - NumPy / Pandas
+  - PyTorch 或 TensorFlow
+  - Jupyter（可选）
+
+---
+
+## 贡献与更新
+
+这是学习型仓库，欢迎按主题持续补充：
+
+1. 新增笔记时，补充背景、要点、参考链接
+2. 新增示例时，写清“依赖、输入、如何运行、预期输出”
+3. 做完实验后，记录关键参数和结论，方便以后回看
+
+---
+
+## 许可证
+
+如无特殊说明，仅供学习与交流使用。
