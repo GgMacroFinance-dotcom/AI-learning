@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NLP 十大核心算法学习地图</title>
+  <meta name="description" content="一个可视化理解 NLP 十大核心算法的静态学习网站" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav" aria-label="主导航">
+      <div class="brand">NLP Algorithm Explorer</div>
+      <a href="../README.md" class="nav-link">学习路线</a>
+      <a href="../CODEX_PLANS.md" class="nav-link">Codex Plans</a>
+    </nav>
+
+    <section class="hero-grid">
+      <div>
+        <p class="eyebrow">从词袋统计到 Transformer</p>
+        <h1>NLP 十大核心算法学习地图</h1>
+        <p class="hero-copy">
+          用通俗语言、任务视角和可交互卡片理解 NLP 算法的演进：统计方法如何走向序列模型，
+          神经网络如何引入语义表示，注意力机制又如何成为大模型的基础。
+        </p>
+        <div class="hero-actions">
+          <a href="#cards" class="button primary">查看算法卡片</a>
+          <a href="#compare" class="button secondary">对比两个算法</a>
+        </div>
+      </div>
+      <aside class="summary-panel" aria-label="学习进度摘要">
+        <span class="panel-label">学习进度</span>
+        <strong id="progressText">0 / 10</strong>
+        <div class="progress-bar" aria-hidden="true">
+          <div id="progressBar"></div>
+        </div>
+        <p id="progressHint">点击算法卡片里的“标记掌握”，开始记录你的学习进度。</p>
+      </aside>
+    </section>
+  </header>
+
+  <main>
+    <section class="section" aria-labelledby="path-title">
+      <div class="section-heading">
+        <p class="eyebrow">Learning Path</p>
+        <h2 id="path-title">算法演进路线</h2>
+        <p>这条路线不是按“热度”排序，而是按理解 NLP 所需的心智模型递进排序。</p>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <section class="section" aria-labelledby="filters-title">
+      <div class="section-heading compact">
+        <p class="eyebrow">Filters</p>
+        <h2 id="filters-title">按任务类型筛选</h2>
+      </div>
+      <div class="filters" id="filters" role="list" aria-label="算法筛选器"></div>
+    </section>
+
+    <section class="section" id="cards" aria-labelledby="cards-title">
+      <div class="section-heading">
+        <p class="eyebrow">Cards</p>
+        <h2 id="cards-title">十大算法卡片</h2>
+        <p>每张卡片都包含“一句话理解”、输入输出、优势、局限和适合 Codex 生成的项目。</p>
+      </div>
+      <div class="card-grid" id="cardGrid"></div>
+    </section>
+
+    <section class="section compare-section" id="compare" aria-labelledby="compare-title">
+      <div class="section-heading">
+        <p class="eyebrow">Compare</p>
+        <h2 id="compare-title">算法对比面板</h2>
+        <p>选择任意两个算法，对比它们的核心思路、适用任务和主要局限。</p>
+      </div>
+      <div class="compare-controls">
+        <label>
+          算法 A
+          <select id="compareA"></select>
+        </label>
+        <label>
+          算法 B
+          <select id="compareB"></select>
+        </label>
+      </div>
+      <div class="compare-grid" id="compareGrid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>建议学习方式：先讲清楚算法直觉，再跑通最小项目，最后把结果接入这个可视化网站。</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
